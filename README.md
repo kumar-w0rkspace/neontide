@@ -99,4 +99,4 @@ To remove it: `/plugin`, pick neontide, and uninstall or disable it.
 
 ## License
 
-[MIT](LICENSE)
+Free to use, change and share under the [MIT License](LICENSE). Keep the copyright notice in your copies.
