@@ -16,7 +16,11 @@ version, and starts again. When Claude stops working, the band hides and the sto
 Claude starts again, it carries on where it left off.
 
 It is a [Claude Code mod](https://code.claude.com/docs/en/plugins/mods). It runs on your machine,
-draws only while Claude works, and costs no tokens.
+draws only while Claude works, and costs no tokens. It never reads or writes your files, runs
+commands, uses the network or calls the model: it only draws, and saves its place in the story.
+
+> **Flashing lights:** the story has lightning flashes, a white flash at the warp jump and glitch
+> flicker. If that's a problem for you, `/neontide off` stops it.
 
 ## What happens
 
@@ -121,9 +125,13 @@ marketplace too. It changes no other settings, so nothing else needs undoing.
   newer. Older versions install it but never draw it. Check `/neontide` says it is on.
 - **Blocky or wrong colours?** Your terminal needs 24-bit colour. Inside tmux, add
   `set -ga terminal-overrides ",*:Tc"` to `~/.tmux.conf`; over SSH, check the remote `TERM` supports it.
+  On a Mac, older versions of Terminal.app lack it; iTerm2, Ghostty or WezTerm work.
 - **Several sessions open?** They share one story: a new session carries on from whichever saved last,
   and `/neontide off` applies to new sessions, so restart the other open ones.
 - **Install refused?** Some organisations only allow approved plugin marketplaces. Ask your admin.
+
+Found a bug, or an odd look in your terminal? [Open an issue](https://github.com/kumar-w0rkspace/neontide/issues)
+and say which terminal, theme and OS you use.
 
 ## License
 
