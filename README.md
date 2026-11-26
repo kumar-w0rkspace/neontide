@@ -81,6 +81,10 @@ It is on straight away: the next time Claude works, the simulation boots.
 It changes none of your settings. Installing adds the usual plugin entry to your user settings, like
 any plugin; pick **project** scope instead to keep it to one project.
 
+To get new versions: `/plugin marketplace update neontide`, then update neontide in `/plugin`
+(or turn on auto-update for the neontide marketplace there). Then run `/reload-plugins` or start a
+new session.
+
 ## Use
 
 | Type | Does |
