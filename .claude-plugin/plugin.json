@@ -1,0 +1,8 @@
+{
+  "name": "neontide",
+  "version": "1.0.0",
+  "description": "A Claude Code mod: an animated sci-fi story that plays above the prompt while Claude works. Matrix rain, a scanner, an aurora, a pac-man who becomes a starship, warp, space, a storm, a crash and a reboot. /neontide on|off",
+  "author": { "name": "kumar-w0rkspace" },
+  "repository": "https://github.com/kumar-w0rkspace/neontide",
+  "license": "MIT"
+}

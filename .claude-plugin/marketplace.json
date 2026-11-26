@@ -1,0 +1,7 @@
+{
+  "name": "neontide",
+  "owner": { "name": "kumar-w0rkspace" },
+  "plugins": [
+    { "name": "neontide", "source": "./", "description": "An animated sci-fi story above the Claude Code prompt while Claude works" }
+  ]
+}
