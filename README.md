@@ -43,6 +43,21 @@ The simulation boots like an old computer, then plays its chapters in order:
 11. **The crash.** The fire melts into rainbow plasma, the plasma corrupts into glitch, and the glitch
     crashes: `ERROR : SIMULATION v1.0 FAILED`, `RESTARTING v1.1...`, and the next loop begins.
 
+### Screenshots
+
+| | |
+|---|---|
+| Boot | <img src="docs/01-boot.png" width="100%" alt="Boot: loading signal 100%"> |
+| Matrix rain | <img src="docs/02-matrix-rain.png" width="100%" alt="Matrix rain"> |
+| Scanner | <img src="docs/03-scanner.png" width="100%" alt="Scanner split in two"> |
+| Equalizer | <img src="docs/04-equalizer.png" width="100%" alt="Equalizer bars in fire colours"> |
+| Aurora | <img src="docs/05-aurora.png" width="100%" alt="Aurora"> |
+| Pac-man | <img src="docs/06-pacman.png" width="100%" alt="Pac-man in the maze with two ghosts"> |
+| The ship | <img src="docs/07-ship.png" width="100%" alt="The ship launches"> |
+| Warp | <img src="docs/08-warp.png" width="100%" alt="Blue afterburner and the warp jump"> |
+| The storm | <img src="docs/09-storm.png" width="100%" alt="The ship in the rain"> |
+| The crash | <img src="docs/10-crash.png" width="100%" alt="Glitch before the crash"> |
+
 One loop takes about **8 minutes of Claude working**. The version number counts your sessions and
 loops: `SIMULATION v6.2` is the sixth session's third loop. The whole story, with timings, is in
 [SIMULATION.md](SIMULATION.md).
