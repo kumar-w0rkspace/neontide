@@ -100,6 +100,19 @@ To remove it: `/plugin`, pick neontide, and uninstall or disable it.
 - **24-bit colour** for the smooth fades (Windows Terminal, iTerm2, most Linux terminals).
 - At least about **60 columns** wide; it looks best from about 100.
 
+## Troubleshooting
+
+- **Looks washed out or messy?** neontide is made for **dark** terminal themes: it draws on your
+  terminal's own background, and on a light one its fades run backwards and the white stars vanish.
+  Switch to a dark colour scheme (Windows Terminal: Settings, your profile, Appearance).
+- **Nothing shows?** It only plays while Claude is working, in a terminal, on Claude Code v2.1.287 or
+  newer. Older versions install it but never draw it. Check `/neontide` says it is on.
+- **Blocky or wrong colours?** Your terminal needs 24-bit colour. Inside tmux, add
+  `set -ga terminal-overrides ",*:Tc"` to `~/.tmux.conf`; over SSH, check the remote `TERM` supports it.
+- **Several sessions open?** They share one story: a new session carries on from whichever saved last,
+  and `/neontide off` applies to new sessions, so restart the other open ones.
+- **Install refused?** Some organisations only allow approved plugin marketplaces. Ask your admin.
+
 ## License
 
 Free to use, change and share under the [MIT License](LICENSE). Keep the copyright notice in your copies.
