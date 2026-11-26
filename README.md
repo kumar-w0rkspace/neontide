@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/banner.png" alt="neontide: an animated story above the Claude Code prompt" width="100%"></p>
+<p align="center"><img src="docs/banner.png" alt="neontide: a story above the Claude Code prompt" width="100%"></p>
 
 <!-- demo GIF goes here: ![neontide](docs/demo.gif) -->
 
