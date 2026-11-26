@@ -7,8 +7,8 @@ sends one small character on a journey through it, and then breaks: it crashes, 
 version, and starts again. When Claude stops working, the band hides and the story pauses; when
 Claude starts again, it carries on where it left off.
 
-It is a [Claude Code mod](https://code.claude.com/docs/en/plugins/mods). It runs on your machine,
-draws only while Claude works, and costs no tokens. It never reads or writes your files, runs
+It is a [Claude Code mod](https://code.claude.com/docs/en/plugins/mods). It runs on your machine and
+draws only while Claude works. It never reads or writes your files, runs
 commands, uses the network or calls the model: it only draws, and saves its place in the story.
 
 > **Flashing lights:** the story has lightning flashes, a white flash at the warp jump and glitch
@@ -18,9 +18,8 @@ commands, uses the network or calls the model: it only draws, and saves its plac
 
 The simulation boots like an old computer, then plays its chapters in order:
 
-1. **Boot.** A cursor blinks and `SIMULATION v1.0` types out. Each line loads unevenly
-   (`> loading signal`, `> generating sky`, `> seeding life`…). The stability check stalls at 87%
-   and blinks **WARN**. A burst of matrix rain, and it begins.
+1. **Boot.** A cursor blinks and `SIMULATION v1.0` types out:
+   `> loading signal`, `> generating sky`, `> seeding life`…
 2. **Scanner.** A beam sweeps the band, matrix-green, then other colours. It splits in two, the pair
    crosses, and the last beam dives into the middle and races out to both edges.
 3. **Equalizer.** The signal comes alive as bars, drifting from fire through cool blue to rainbow.
@@ -28,7 +27,7 @@ The simulation boots like an old computer, then plays its chapters in order:
 5. **Pac-man.** The sky burns out into a row of dots, and out of them comes the first living thing:
    a pac-man, born hungry. He eats through a maze with two ghosts behind him.
 6. **The ship.** A ship builds round him, `·∙≈≈╼▐{C}▌━━▶`, and launches. The maze streams away.
-7. **Warp.** Faster and faster. The afterburner turns blue with shock diamonds `◆`, then the jump:
+7. **Warp.** Faster and faster. The afterburner turns blue, then the jump:
    stars stretch into lines and the light blooms white.
 8. **Space.** Out of hyperspace into a nebula, constellations drawing themselves, a starfield, a
    comet streaking past underneath, and a planet rising ahead.
