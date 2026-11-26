@@ -78,6 +78,9 @@ claude plugin install neontide --marketplace kumar-w0rkspace/neontide
 
 It is on straight away: the next time Claude works, the simulation boots.
 
+It changes none of your settings. Installing adds the usual plugin entry to your user settings, like
+any plugin; pick **project** scope instead to keep it to one project.
+
 ## Use
 
 | Type | Does |
