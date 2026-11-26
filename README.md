@@ -93,7 +93,11 @@ new session.
 | `/neontide off` | Stops it (it stays off in new sessions until you turn it on) |
 | `/neontide on` | Starts it again, from the boot screen |
 
-To remove it: `/plugin`, pick neontide, and uninstall or disable it.
+## Uninstall
+
+To pause it, `/neontide off`. To remove it, `/plugin` → **Installed** → neontide → **Uninstall** (or
+`claude plugin uninstall neontide@neontide`), then `/plugin marketplace remove neontide` to drop the
+marketplace too. It changes no other settings, so nothing else needs undoing.
 
 ## What you need
 
