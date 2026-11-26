@@ -1,14 +1,6 @@
-# neontide
-
-**An animated sci-fi story that plays above the Claude Code prompt while Claude works.**
+<p align="center"><img src="docs/banner.png" alt="neontide: an animated story above the Claude Code prompt" width="100%"></p>
 
 <!-- demo GIF goes here: ![neontide](docs/demo.gif) -->
-
-```
- ━━━━━━━━━━━━━━━━━━──────────────────────━━━━━━━━━━━━━━━━━━━
- ━━·∙≈≈≈≈≈≈≈≈≈≈≈≈≈≈╼▐{O}▌━━▶────✶───────────━━━━━━━━━━━━━━━━━━
- ━━━━━━━━━━━━━━━━━━━─────────────────────━━━━━━━━━━━━━━━━━━━
-```
 
 While Claude thinks, a simulation runs in a thin band above your prompt. It builds a little world,
 sends one small character on a journey through it, and then breaks: it crashes, reboots as a new
