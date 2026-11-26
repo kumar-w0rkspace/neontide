@@ -130,8 +130,8 @@ marketplace too. It changes no other settings, so nothing else needs undoing.
   and `/neontide off` applies to new sessions, so restart the other open ones.
 - **Install refused?** Some organisations only allow approved plugin marketplaces. Ask your admin.
 
-Found a bug, or an odd look in your terminal? [Open an issue](https://github.com/kumar-w0rkspace/neontide/issues)
-and say which terminal, theme and OS you use.
+Found a bug, or have an idea for the story? [Open an issue](https://github.com/kumar-w0rkspace/neontide/issues/new/choose).
+Security problems go privately, see [SECURITY.md](SECURITY.md).
 
 ## License
 

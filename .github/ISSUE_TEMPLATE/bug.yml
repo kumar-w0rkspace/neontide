@@ -1,0 +1,45 @@
+name: "🐞 Bug or odd look"
+description: Something broke, or the simulation looks wrong in your terminal
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What did you see, and what did you expect? Which chapter was playing, if you know (`/neontide` says)?
+    validations:
+      required: true
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal
+      placeholder: Windows Terminal, iTerm2, GNOME Terminal, kitty, tmux inside…
+    validations:
+      required: true
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Terminal theme
+      options:
+        - Dark
+        - Light
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: Windows 11, macOS 15, Ubuntu 24.04, WSL…
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Claude Code version
+      description: From `claude --version`
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Optional. Drag an image in here. Please crop out anything private (paths, names, other text).
