@@ -97,8 +97,12 @@ To remove it: `/plugin`, pick neontide, and uninstall or disable it.
   app or an editor's panel.
 - **A font with box-drawing and block characters** (`━ ░ ▒ ▓ █ ▀ ▄ ◆ ✶`). Most modern terminal fonts
   have them: Cascadia Code (Windows Terminal's default), JetBrains Mono, Fira Code, Menlo.
+- The matrix rain uses Japanese katakana (`ｦｱｳｴｵｶ`). On Linux, if you see boxes, install a CJK font
+  (for example `sudo apt install fonts-noto-cjk`).
 - **24-bit colour** for the smooth fades (Windows Terminal, iTerm2, most Linux terminals).
 - At least about **60 columns** wide; it looks best from about 100.
+- It takes **1 to 3 rows** above the prompt (3 for most chapters), only while Claude works, so the
+  prompt shifts a little as chapters change.
 
 ## Troubleshooting
 
