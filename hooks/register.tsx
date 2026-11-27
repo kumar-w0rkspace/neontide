@@ -1090,7 +1090,9 @@ function simCrash(): void {
   simRunsDirty = true
 }
 // The version shown. next: the version restarting after this crash.
-const simVersion = (next = false): string => `v${simMajor || 1}.${simLoops + (next ? 1 : 0)}`
+// The version shown. The demo is not a real session: it always shows v1.0 (restarting v1.1) and never
+// counts.
+const simVersion = (next = false): string => (demoOn() ? `v1.${next ? 1 : 0}` : `v${simMajor || 1}.${simLoops + (next ? 1 : 0)}`)
 const rebootText = (): string => `ERROR : SIMULATION ${simVersion()} FAILED`
 const REBOOT_SHORT = 'ERROR'
 const REBOOT_RESTART = 'RESTARTING'
@@ -1380,6 +1382,12 @@ const TIDE_GLITCH_MS = 30 * 1000
 const TIDE_RECENT = 3
 let tide = false
 let tideFull = false
+// /neontide demo: one whole round shown while Claude is idle (no tokens spent), from the POST to the end of
+// the reboot; then the band hides when idle and the simulation carries on as normal. For previewing the
+// story while working on it: it answers only where the environment variable NEONTIDE_DEMO is 1, and is
+// not in the README or the command's hint. Not saved: a reload ends it.
+let demo = false
+const demoOn = (): boolean => demo && tide && tideFull
 let tideCat = 0
 let tideLeft: string[] = []
 let tideRecent: Partial<Record<Family, string[]>> = {}
@@ -1503,7 +1511,9 @@ function tideNext(): void {
   if (band === 'post') return postDone()
   // the reboot is over: the next version of the simulation starts
   if (band === 'reboot') {
-    simCrash()
+    // the demo round is over (it doesn't count); a real crash is the next loop
+    if (demoOn()) demo = false
+    else simCrash()
   }
   if (!tideFull || !isFamily(band) || tideLeft.length === 0) return tideEnter(tideCat + 1)
   const v = TIDE_ORDER[band] ? tideLeft[0]! : closestVariant(band, band === 'scanner' ? scanGroup(tideLeft) : tideLeft)
@@ -1517,6 +1527,7 @@ function tideNext(): void {
 }
 function tideStart(full: boolean): void {
   tide = true
+  demo = false
   tideFull = full
   tideRecent = {}
   tideEnter(0)
@@ -2541,7 +2552,7 @@ export const register: Register = on => {
       // A family band's time is up (a scanner's lap, an eq's beats…): switch on this very frame. A change
       // within the family is built here (scanner: hard cut where the beams are; aurora: colour slide;
       // others: fadeKind()); a change of category is left to rasterSite on the next render.
-      if (frameTimed() && isWorking) {
+      if (frameTimed() && (isWorking || demoOn())) {
         const target = (s: Site) => s.fade?.target ?? s.effect
         const f = band as Family
         const due = [...sites.values()].some(s => s.name.split(':')[0] === f && (f === 'scanner' && target(s).end !== undefined ? (target(s).pos ?? 0) >= target(s).end! : (target(s).age ?? 0) >= variantFrames(f, variants[f], target(s).w, scanSplit)))
@@ -2578,7 +2589,7 @@ export const register: Register = on => {
       }
       // The simulation's glitch is timed in frames: the corrupt fade-in (FADE_LEN.corrupt), then
       // SIM_GLITCH_MS of full glitch, then on to the reboot (the crash between them is unchanged)
-      if (tide && tideFull && band === 'glitch' && isWorking) {
+      if (tide && tideFull && band === 'glitch' && (isWorking || demoOn())) {
         glitchFrames++
         if (glitchFrames >= (FADE_LEN.corrupt as number) + Math.round(SIM_GLITCH_MS / FRAME_MS)) {
           glitchFrames = 0
@@ -2598,7 +2609,7 @@ export const register: Register = on => {
     })
     $.clock.every(1000, () => {
       // a second of Claude working counts towards the band's time
-      if (tide && isWorking) shuffleWorkedMs += 1000
+      if (tide && (isWorking || demoOn())) shuffleWorkedMs += 1000
       if (tidePosDirty) {
         tidePosDirty = false
         void $.store.set('v2.tidePos', tidePos())
@@ -2635,6 +2646,12 @@ export const register: Register = on => {
       $.ui.invalidate('ui.render')
       return { text: 'Simulation off' }
     }
+    if (arg === 'demo' && (await $.env.get('NEONTIDE_DEMO')) === '1') {
+      tideStart(true)
+      demo = true
+      $.ui.invalidate('ui.render')
+      return { text: 'Simulation demo: one round while Claude is idle.' }
+    }
     return { text: 'Usage: /neontide on|off' }
   })
 
@@ -2651,7 +2668,7 @@ export const register: Register = on => {
   on('ui.render', { component: 'AbovePrompt' }, async ($, e, next) => {
     if (e.surface !== 'terminal') return next(e)
     const p = e.props
-    if (band === 'off' || !p.isWorking || p.hasSurvey || p.isCollapsed) {
+    if (band === 'off' || (!p.isWorking && !demoOn()) || p.hasSurvey || p.isCollapsed) {
       sites.delete(e.requestId)
       return next(e)
     }
@@ -2661,7 +2678,8 @@ export const register: Register = on => {
     bandCols = cols
     const rows = Math.max(1, Math.min(BAND_HEIGHT[band] ?? BAND_ROWS, p.maxRows - 2))
     // this session's simulation number is taken the first time it really shows (Claude working)
-    if (tide && p.isWorking) simEnter()
+    // (Claude working, not the demo)
+    if (tide && p.isWorking && !demoOn()) simEnter()
     const effect = rasterSite(e.requestId, bandKey(), cols, rows)
     return (
       <Box flexDirection="column">

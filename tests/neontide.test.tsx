@@ -98,6 +98,24 @@ test('the simulation carries on from the saved position at the next load, after 
   expect((store.get('v2.tidePos') as { cat: number }).cat).toBe(3)
 })
 
+test('/neontide demo answers only where NEONTIDE_DEMO is 1, and then plays while Claude is idle', async ($, on) => {
+  const env = new Map<string, string>()
+  engine(on, new Map<string, unknown>())
+  on('env.get', (_: unknown, e: any) => ({ value: env.get(e.name) }))
+  await $.session.start({ cwd: '/', surface: 'terminal', isInteractive: true })
+
+  expect((await $.command.run({ command: 'neontide', args: 'demo' })).text).toBe('Usage: /neontide on|off')
+  let ui = await $.ui.mount(band(false))
+  expect(await ui.find({ type: 'Raster' })).toBeFalsy()
+  await ui.unmount()
+
+  env.set('NEONTIDE_DEMO', '1')
+  expect((await $.command.run({ command: 'neontide', args: 'demo' })).text).toBe('Simulation demo: one round while Claude is idle.')
+  ui = await $.ui.mount(band(false))
+  expect(await ui.find({ type: 'Raster' })).toBeTruthy()
+  await ui.unmount()
+})
+
 test('a saved position that no longer fits starts the round again', async ($, on) => {
   engine(on, new Map<string, unknown>([['v2.tidePos', { full: true, cat: 3, variant: 'inward', left: [], recent: {} }]]))
   await $.session.start({ cwd: '/', surface: 'terminal', isInteractive: true })
