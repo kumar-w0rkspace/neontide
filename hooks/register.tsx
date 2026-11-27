@@ -1371,7 +1371,11 @@ const SPACE: Band[] = ['nebula', 'constellations', 'stars', 'comet', 'planet']
 const SPACE_MS = 20 * 1000
 // the planet stays only while it rises (4 s) and a moment more, then the dive
 const PLANET_MS = 5 * 1000
-const bandMs = (b: Band): number => (b === 'planet' ? PLANET_MS : SPACE.includes(b) ? SPACE_MS : TIDE_BAND_MS)
+// the simulation's glitch is timed in frames, not on the 1 s clock (see the frame clock): its corrupt
+// fade-in, then SIM_GLITCH_MS of full glitch, then the crash (which runs on the reboot's time)
+const SIM_GLITCH_MS = 2 * 1000
+let glitchFrames = 0
+const bandMs = (b: Band): number => (b === 'glitch' ? Infinity : b === 'planet' ? PLANET_MS : SPACE.includes(b) ? SPACE_MS : TIDE_BAND_MS)
 const TIDE_GLITCH_MS = 30 * 1000
 const TIDE_RECENT = 3
 let tide = false
@@ -1382,7 +1386,8 @@ let tideRecent: Partial<Record<Family, string[]>> = {}
 let fadeInto = ''
 // The simulation (tide full) times each band to its own motion, counted in frames: a scanner one lap (left
 // to right and back, so it depends on the band's width), an eq EQ_BEATS beats, warp burst whole bursts,
-// any other family band TIDE_BAND_MS. Stars, trippy and glitch get TIDE_BAND_MS on the clock. Plain
+// any other family band TIDE_BAND_MS. Stars and trippy get TIDE_BAND_MS on the clock; glitch is counted in
+// frames (SIM_GLITCH_MS after its corrupt fade-in). Plain
 // tide keeps SHUFFLE_MS.
 const TIDE_BAND_MS = 10 * 1000
 const TIDE_BAND_FRAMES = Math.round(TIDE_BAND_MS / FRAME_MS)
@@ -2571,6 +2576,16 @@ export const register: Register = on => {
           $.ui.invalidate('ui.render')
         }
       }
+      // The simulation's glitch is timed in frames: the corrupt fade-in (FADE_LEN.corrupt), then
+      // SIM_GLITCH_MS of full glitch, then on to the reboot (the crash between them is unchanged)
+      if (tide && tideFull && band === 'glitch' && isWorking) {
+        glitchFrames++
+        if (glitchFrames >= (FADE_LEN.corrupt as number) + Math.round(SIM_GLITCH_MS / FRAME_MS)) {
+          glitchFrames = 0
+          tideNext()
+          $.ui.invalidate('ui.render')
+        }
+      } else if (band !== 'glitch') glitchFrames = 0
       for (const [requestId, site] of sites) {
         // The band changed size (a fade ended on a shorter band): wait for the redraw rather than send a
         // frame the engine refuses, which used to drop the site and restart the band from its first frame.

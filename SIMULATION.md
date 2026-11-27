@@ -47,7 +47,7 @@ to play.
 | | **Space** | Out of hyperspace into a **nebula**. **Constellations** draw themselves as the sky drifts past, with shooting stars and a blinking satellite. A **starfield**. A **comet** streaks past underneath. A **planet** rises ahead. |
 | `> forming weather` | **The dive and the storm** | The planet swells, thick clouds pile up, and the ship dives through them into the rain. The storm builds: drizzle, a downpour, a gale that buffets the ship, the cloud row flickering with sheet lightning until the whole sky lights up. At its peak, yellow forked bolts strike all around and thunder shakes the ship. Then a lull: the rain glints, the bolts drift far off. |
 | `> igniting fire` | **The strike** | The sky lights up once more. Then the last and biggest bolt comes down onto the ship and it explodes. The pac-man is thrown clear and tumbles away. The wreck burns. |
-| `> stability check… WARN` | **The end** | The fire melts into a rainbow plasma, the plasma corrupts into glitch, and the glitch crashes. |
+| `> stability check… WARN` | **The end** | The fire melts into a rainbow plasma, the plasma corrupts into glitch, and after a short burst of it (about 2 seconds) the glitch crashes. |
 | | **Reboot** | `ERROR : SIMULATION v1.4 FAILED`, then `RESTARTING v1.5...`, then matrix rain. The next loop starts straight away with the scanner (no boot screen between loops). |
 
 The pac-man is the simulation's one character: born from the burnt-out sky, he travels through
@@ -81,7 +81,7 @@ About, in a 120-column window, counting only the time Claude works:
 | Nebula, constellations, starfield, comet | 20 s each |
 | Planet and the dive | 10 s |
 | The storm, the strike and the fire | 1 min |
-| Plasma, glitch, crash and reboot | 30 s |
+| Plasma, glitch, crash and reboot | 27 s |
 | **One loop** | **about 8 min** |
 
 ## What you need
